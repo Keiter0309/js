@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+</head>
+<body>
+    <div>
+    <form class="container" onfocusout="validateForm()">
+        <div class="form-group">
+            <label for="exampleInputEmail1">First Name: </label>
+            <input type="text" class="form-control" id="firstname" aria-describedby="">
+            <p id="firstnameError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Last Name: </label>
+            <input type="text" class="form-control" id="lastname">
+            <p id="lastnameError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="">Email: </label>
+            <input type="email" class="form-control" id="email">
+            <p id="emailError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="">Phone number: </label>
+            <input type="test" class="form-control" id="phonenumber">
+            <p id="phoneError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="">Quantity purchased: </label>
+            <input type="text" class="form-control" id="quantity">
+            <p id="quantityError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="">Delivery Date: </label>
+            <input type="date" class="form-control" id="delivery">
+            <p id="deliveryError" style="color: red;"></p>
+        </div>
+        <div class="form-group">
+            <label for="">Payment Methods: </label>
+            <input type="radio" class="" id=""> Digital mode of payment
+            <input type="radio" class="" id=""> Cash
+            <p id="deliveryError" style="color: red;"></p>
+        </div>
+    <button type="submit" class="btn btn-primary" id="btn">Submit</button>
+    <button type="button" class="btn btn-primary">Delete</button>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs;.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById("btn").addEventListener("click", validateForm);
+    function validateForm(event) {
+        event.preventDefault();
+        
+
+
+        let namePattern = /^[A-Za-z\s]{2,}$/;
+        let firstName = document.getElementById("firstname").value;
+        let firstnameError = document.getElementById("firstnameError");
+        let lastName = document.getElementById("lastname").value;
+        let lastnameError = document.getElementById("lastnameError");
+
+
+        let phoneNumber = document.getElementById("phonenumber").value;
+        let phoneError = document.getElementById("phoneError");
+        let numbercheck = /^\d{10,}$/;
+
+        let quantity = document.getElementById("quantity").value;
+        let quantityError = document.getElementById("quantityError");
+
+        let deliveryDate = document.getElementById("delivery").value;
+        let deliveryDateError = document.getElementById("deliveryError");
+        let selectedDate = new Date(deliveryDate);
+        let currentDate = new Date();
+
+        if(!namePattern.test(firstName)) {
+            firstnameError.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("firstname").style.outline = "2px solid red";
+        }else {
+            firstnameError.innerHTML = "";
+            document.getElementById("firstname").style.outline = "2px solid green";
+        }
+
+        if(!namePattern.test(lastName)) {
+            lastnameError.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("lastname").style.outline = "2px solid red";
+        }else {
+            lastnameError.innerHTML = "";
+            document.getElementById("lastname").style.outline = "2px solid green";
+        }
+
+        if(!b.test(email)) {
+            emailErorr.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("email").style.outline = "2px solid red";
+        }else {
+            emailErorr.innerHTML = "";
+            document.getElementById("email").style.outline = "2px solid green"
+        }
+
+        if(!numbercheck.test(phoneNumber)) {
+            phoneError.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("phonenumber").style.outline = "2px solid red";
+        }else {
+            phoneError.innerHTML = "";
+            document.getElementById("phonenumber").style.outline = "2px solid green";
+        }
+
+        if(isNaN(quantity) || quantity <= 0) {
+            quantityError.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("quantity").style.outline = "2px solid red";
+        }else {
+            quantityError.innerHTML = "";
+            document.getElementById("quantity").style.outline = "2px solid green";
+        }
+
+        if(selectedDate < currentDate) {
+            deliveryDateError.innerHTML = "Ngay nhan hang khong hop le!";
+            document.getElementById("delivery").style.outline = "2px solid red";
+        }else {
+            deliveryDateError.innerHTML = "";
+            document.getElementById("delivery").style.outline = "2px solid green";
+        }
+
+        if (
+        namePattern.test(firstName) &&
+        namePattern.test(lastName) &&
+        b.test(email) &&
+        numbercheck.test(phoneNumber) &&
+        !isNaN(quantity) && quantity > 0 &&
+        selectedDate >= currentDate
+    ) {
+        alert("Đăng ký mua hàng thành công!");
+    }
+    }
+</script>
+</body>
+</html>

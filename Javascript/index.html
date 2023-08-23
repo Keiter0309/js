@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+</head>
+<body>
+<div class="container">
+    <form onfocusout="validateForm()">
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">User name</label>
+        <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+        <p id="usernameError" style="color: red"></p>
+        </div>
+        <div class="mb-3">
+        <label for="" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" onfocusout="">
+        <p id="passwordError" style="color: red;"></p>
+        <div class="mb-3">
+        <label for="" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmpassword" onfocusout="">
+        <p id="confirmpasswordError" style="color: red;"></p>
+        <div class="mb-3">
+        <label for="" class="form-label">First name</label>
+        <input type="text" class="form-control" id="firstname" onfocusout="validateName()">
+        <p id="firstnameError" style="color: red;"></p>
+        <div class="mb-3">
+        <label for="" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="lastname" onfocusout="validateName()">
+        <p id="lastnameError" style="color: red;"></p>
+        <div class="mb-3">
+        <label for="" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" onfocusout="">
+        <p id="emailError" style="color: red;"></p>
+        <div class="mb-3">
+        <label for="" class="form-label">Phone number</label>
+        <input type="text" class="form-control" id="phonenumber">
+        <p id="phoneError" style="color: red;"></p>
+        </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script>
+    function validateForm() {
+        let a = /^[A-Za-z]/;
+        let username = document.getElementById("username").value;
+
+        let b = /^[A-Za-z][\w$.]+@[\w]+\.\w+$/;
+        let email = document.getElementById("email").value;
+
+        let password = document.getElementById("password").value;
+        let passwordError = document.getElementById("passwordError");
+        let lengthCheck = password.length >= 6;
+        let uppercaseCheck = /[A-Z]/.test(password);
+        let lowercaseCheck = /[a-z]/.test(password);
+        let numberCheck = /\d/.test(password);
+        let specialCharCheck = /[!@#$%^&*]/.test(password);
+        
+        let passwordInput = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmpassword").value;
+        let message = document.getElementById("confirmpasswordError");
+
+        let phoneNumber = document.getElementById("phonenumber").value;
+        let phoneError = document.getElementById("phoneError");
+        let numbercheck = /^\d{10,}$/;
+        
+        
+        if(!a.test(username)) {
+            document.getElementById("usernameError").innerHTML = "Thong tin duoc yeu cau"
+            document.getElementById("username").style.outline = "2px solid red"
+        }else {
+            document.getElementById("usernameError").innerHTML = "";
+            document.getElementById("username").style.outline = "none";
+        }
+        
+        if (lengthCheck && uppercaseCheck && lowercaseCheck && numberCheck && specialCharCheck) {
+            passwordError.innerHTML = "";
+            document.getElementById("password").style.outline = "none";
+        } else {
+            passwordError.innerHTML = "Mat khau phai co it nhat 6 ky tu";
+            document.getElementById("password").style.outline = "2px solid red";
+        }
+        
+        if (passwordInput === confirmPassword && passwordInput !== "" && confirmPassword !== "") {
+            message.innerHTML = "Mat khau trung khop!";
+            message.style.color = "green";
+            document.getElementById("confirmpassword").style.outline = "none";
+        } else {
+            message.textContent = "Mật khau khong trung khop!";
+            message.style.color = "red";
+            document.getElementById("confirmpassword").style.outline = " 2px solid red"
+        }
+        
+        if(!b.test(email)) {
+            document.getElementById("emailError").innerHTML = "Thong tin duoc yeu cau"
+            document.getElementById("email").style.outline = "2px solid red"
+        }else {
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("email").style.outline = "none"
+        }
+
+        if(numbercheck.test(phoneNumber)) {
+            phoneError.innerHTML = "";
+            document.getElementById("phonenumber").style.outline = "none";
+        }else {
+            phoneError.innerHTML = "Thong tin duoc yeu cau";
+            document.getElementById("phonenumber").style.outline = "2px solid red";
+        }
+    }
+
+    function validateName() {
+        let firstname = document.getElementById("firstname").value;
+        let lastname = document.getElementById("lastname").value;
+        let nameError = document.getElementById("firstnameError");
+        let lastnameError = document.getElementById("lastnameErorr");
+
+        let namePattern = /^[A-Za-z\s]{2,}$/; // Biểu thức chính quy kiểm tra tên và họ chứa ít nhất 2 ký tự chữ cái hoặc khoảng trắng
+    
+    if (namePattern.test(firstname) && namePattern.test(lastname)) {
+        nameError.innerHTML = "";
+        lastnameError = document.getElementById("lastnameError")
+        document.getElementById("firstname").style.outline = "none";
+        document.getElementById("lastname").style.outline = "none";
+    } else {
+        nameError.innerHTML = "Ten va ho khong hop le";
+        document.getElementById("firstname").style.outline = "2px solid red";
+        document.getElementById("lastname").style.outline = "2px solid red";
+    }
+    }
+</script>
+</body>
+</html>

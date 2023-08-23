@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./0.jpg" alt="" id="img"> <br>
+    <button onclick="first()">First</button>
+    <button onclick="next()">Next</button>
+    <button onclick="prev()">Previous</button>
+    <button onclick="last()">Last</button>
+</body>
+<script>
+    let images = [];
+    for (let i=0; i<4; i++) {
+        images[i] = new Image;
+        images[i].src = i + ".jpg"
+    }
+
+    const first = () => {
+        index = 0;
+        let img = document.getElementById("img");
+        img.src = images[index].src;
+    }
+
+    const last = () => {
+        index= images.length-1;
+        let img = document.getElementById("img");
+        img.src=images[index].src;
+    }
+
+    const next = () => {
+        index++;
+        if(index>images.length) {
+            index = 0;
+        }
+        let img = document.getElementById("img");
+        img.src = images[index].src;
+    }
+
+    const prev = () => {
+        index--;
+        if(index<0) {
+            index = images.length-1;
+        }
+        let img = document.getElementById("img");
+        img.src = images[index].src;
+    }
+</script>
+</html>

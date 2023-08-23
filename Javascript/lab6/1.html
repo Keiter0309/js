@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./mu.jpg" onmouseover="fover()" onmouseout="fout()" alt="" width="20%" id="img">
+</body>
+<script>
+    let over = new Image();
+    over.src = "./mu1.jpg"
+    let out = new Image();
+    out.src = "./mu.jpg";
+    const fover = () => {
+        document.getElementById("img");
+        img.src = over.src;
+    }
+
+    const fout = () => {
+        document.getElementById("img");
+        img.src = out.src;
+    }
+</script>
+</html>
