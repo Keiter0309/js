@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center">Dat hang</h3>
+        <form action="" class="form-group" onfocusout="validateForm()">
+            <label for="">San pham</label>
+            <input type="text" class="form-control" id="product">
+            <p id="productError" style="color: red;"></p>
+            <label for="">Loai</label>
+            <select name="" id="" class="form-select">
+                <option value="" selected></option>
+                <option value="" class="form-control">Muon mua gi cung duoc</option>
+            </select>
+            <label for="">Don gia</label>
+            <input type="text" class="form-control" id="price">
+            <p id="priceError" style="color: red;"></p>
+            <label for="">Noi nhan hang</label>
+            <input type="radio" name="radioButton" class="form-check-input" id="urban" value="Noi thanh">Noi thanh
+            <input type="radio" name="radioButton" class="form-check-input" id="suburban" value="Ngoai thanh">Ngoai thanh <br>
+            <div style="display: none;" id="shipping" class="form-group">
+                <label for="">Phi van chuyen</label>
+                <input type="text" placeholder="100000" id="ship" disabled class="form-control" value="100000">
+            </div>
+        </form>
+        <button class="btn btn-outline-primary" id="btn">Dat mua</button>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script>
+    const validateForm = () => {
+        let a = /^[A-Za-z]/;
+        let product = document.getElementById("product").value;
+        let productError = document.getElementById("productError");
+
+        if(!a.test(product)) {
+            productError.innerHTML = "Nhap vao san pham";
+            document.getElementById("product").style.outline = "2px solid red";
+        }else {
+            productError.innerHTML = "";
+            document.getElementById("product").style.outline = "2px solid green";
+        }
+
+        let b = /\d/;
+        let price = document.getElementById("price").value;
+        let priceError = document.getElementById("priceError");
+
+        if(!b.test(price)) {
+            priceError.innerHTML = "Nhap vao don gia";
+            document.getElementById("price").style.outline = "2px solid red";
+        }else {
+            priceError.innerHTML = "";
+            document.getElementById("price").style.outline = "2px solid green";
+        }
+    }
+
+    const check = () => {
+        let urban = document.getElementById("urban").checked;
+        let suburban = document.getElementById("suburban").checked;
+
+        if(suburban) {
+            document.getElementById("shipping").style.display= "block";
+        }else {
+            document.getElementById("shipping").style.display= "none";
+        }
+    }
+
+    const radioButtons = document.querySelectorAll('input[name="radioButton"]');
+        radioButtons.forEach(radioButton => {
+            radioButton.addEventListener("change", function() {
+                check(); 
+            });
+        });
+
+    document.getElementById("btn").addEventListener("click", function(){
+            event.preventDefault();
+            let product = document.getElementById("product").value;
+            let price = document.getElementById("price").value;
+            let deliveryType = document.querySelector(`input[name="radioButton"]:checked`).value;
+            let suburban = document.getElementById("suburban").checked;
+            let urban = document.getElementById("urban").checked;
+            let shipping = document.getElementById("ship").value;
+    
+            if(product && price && deliveryType) {
+                alert(`Dat mua thanh cong!\nSan pham: ${product}\nGia: ${price}\nLoai giao hang: ${deliveryType}`)
+            }else {
+                alert("Vui long dien day du thong tin mua hang!")
+            }
+        })
+</script>
+</body>
+</html>
