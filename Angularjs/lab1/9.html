@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <p>Nhap vao ban kinh hinh tron: <input type="number" ng-model="radius"></p>
+        <p>Dien tich hinh tron: <span ng-bind="dt"></span></p>
+        <p>Chu vi hinh tron: <span ng-bind="cv"></span></p>
+        <button ng-click="calculate()">Tinh</button>
+    </div>
+    <script>
+        let app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            $scope.calculate = function() {
+                let radius = parseFloat($scope.radius);
+                if(isNaN(radius)) {
+                    $scope.dt = "Vui long nhap ban kinh hop le";
+                    $scope.cv = "";
+                }else {
+                 let dt = Math.PI * radius * radius;
+                 let cv = 2 * Math.PI * radius;
+                $scope.dt = dt.toFixed(2);
+                $scope.cv = cv.toFixed(2);
+                }
+            }
+             })
+    </script>
+</body>
+</html>

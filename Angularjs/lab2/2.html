@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<title>Title</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center mt-5" ng-app="myApp" ng-controller="myCtrl">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Thu tu tang dan cua ba so
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" ng-init="a=0 b=0 c=0">
+                    <label for="" class="mt-1">Nhap vao so A</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="a"></p>
+                    <label for="" class="mt-1">Nhap vao so B</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="b"></p>
+                    <label for="" class="mt-1">Nhap vao so C</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="c"></p>
+                </li>
+            </ul>
+            <div class="card-footer">
+                <p class="text-danger fs-3">Sorted: <span ng-bind="value(a,b,c)"></span> </p>
+            </div>
+        </div>
+    </div>
+<script>
+    let app = angular.module("myApp", []);
+    app.controller("myCtrl", ['$scope', function($scope){
+        $scope.a = 0;
+        $scope.b = 0;
+        $scope.c = 0;
+        $scope.value = function(a,b,c) {
+            if(a>b) {
+                let temp = a;
+                a = b;
+                b = temp;
+            }
+            if(a>c) {
+                let temp = a;
+                a = c;
+                c = temp;
+            }
+            if(b>c) {
+                let temp = b;
+                b = c;
+                c = temp;
+            }
+            return [a,b,c].join(', ');
+        }
+    }])
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

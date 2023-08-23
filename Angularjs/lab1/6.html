@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="" ng-init="num1=0; num2=0;">
+        <p><input type="number" ng-model="num1"></p>
+        <p><input type="number" ng-model="num2"></p>
+        <p>Tong: <span ng-bind="num1 + num2"></span></p>
+        <p>Hieu: <span ng-bind="num1 - num2"></span></p>
+        <p>Tich: <span ng-bind="num1 * num2"></span></p>
+        <p>Thuong: <span ng-bind="num1 / num2"></span></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-init="num=0;">
+        <p>Nhap mot so nguyen duong co 2 chu so</p>
+        <p>Nhap mot so: <input type="number" ng-model="num"></p>
+        <p> {{(num-(num%10))/10}} + {{(num%10)}} </p>
+        <p>Tong hai so: {{(num%10)+(num-(num%10))/10}} </p>
+        <p><span ng-bind="N"></span></p>
+    </div>
+</body>
+</html>

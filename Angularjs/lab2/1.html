@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<title>Title</title>
+</head>
+<body>
+    <div class="d-flex justify-content-center mt-5" ng-app="myApp" ng-controller="myCtrl">
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Tim gia tri lon nhat cua ba so
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" ng-init="a=0 b=0 c=0">
+                    <label for="" class="mt-1">Nhap vao so A</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="a"></p>
+                    <label for="" class="mt-1">Nhap vao so B</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="b"></p>
+                    <label for="" class="mt-1">Nhap vao so C</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="c"></p>
+                </li>
+            </ul>
+            <div class="card-footer">
+                <p class="text-danger fs-3">Max: <span ng-bind="maxValue(a,b,c)"></span></p>
+            </div>
+        </div>
+    </div>
+<script>
+    let app = angular.module("myApp", []);
+    app.controller("myCtrl", ['$scope', function($myCtrl){
+        $myCtrl.maxValue = function(a,b,c) {
+            return Math.max(a,b,c);
+        }
+    }])
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>

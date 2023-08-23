@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <p>Check to make month readonly: <input type="checkbox" ng-model="disableMonth"></p>
+        <p><input type="month" ng-readonly="disableMonth" ng-model="selectMonth"></p>
+    </div>
+    <script>
+        let app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+            $scope.disableMonth = false;
+        })
+    </script>
+</body>
+</html>

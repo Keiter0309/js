@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<style>
+    .flex-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate( -50%);
+    }
+</style>
+<body>
+    <div class="flex-container" ng-app="myApp" ng-controller="myCtrl">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" ng-model="showEquation" value="1"> Phuong trinh bac 1
+            <input class="form-check-input" type="radio" name="flexRadioDefault" ng-model="showEquation" value="2"> Phuong trinh bac 2
+        <div ng-if="showEquation === '1'" class="ms-3 mt-2">
+            <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Phuong trinh bac 1
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" ng-init="a=0; b=0; c=0;">
+                    <label for="" class="mt-1">Nhap vao so A</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="a"></p>
+                    <label for="" class="mt-1">Nhap vao so B</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="b"></p>
+                </li>
+                <div class="card-footer">
+                    <p class="text-danger fs-3">Result: <span ng-bind="solvedEquation1(a,b)"></span> </p>
+                </div>
+            </ul>
+        </div>
+        </div>
+        <div ng-if="showEquation === '2'" class="ms-3 mt-2">
+            <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Phuong trinh bac 2
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" ng-init="a=0; b=0; c=0;">
+                    <label for="" class="mt-1">Nhap vao so A</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="a"></p>
+                    <label for="" class="mt-1">Nhap vao so B</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="b"></p>
+                    <label for="" class="mt-1">Nhap vao so C</label>
+                    <p><input type="number" class="form-control mt-2" ng-model="c"></p>
+                </li>
+            </ul>
+            <div class="card-footer">
+                <p class="text-danger fs-3">Result: <span ng-bind="solvedEquation2(a,b,c)"></span> </p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<script>
+    let app = angular.module("myApp", []);
+    app.controller("myCtrl", ['$scope', function($scope){
+        $scope.solvedEquation1 = function(a,b) {
+            if(a==0) {
+                if(b==0) {
+                    return "Phuong trinh vo so nghiem"
+                }
+            }else {
+                return ((-b)/a).toFixed(2);
+            }
+        }
+
+        $scope.solvedEquation2 = function(a,b,c) {
+            let delta = (b*b) - (4*a*c);
+            if(a==="") {
+                if(b==="") {
+                    
+                }
+            }else {
+                if(delta<0) {
+                    return "Phuong trinh vo nghiem";
+                }else if(delta === 0) {
+                    let x = (-b)/(2*a);
+                    return "Phuong trinh co nghiem kep" + x1;
+                }else {
+                    let x1 = (((-b)-(Math.sqrt(delta)))/(2*a)).toFixed(3);
+                    let x2 = (((-b)+(Math.sqrt(delta)))/(2*a)).toFixed(3);
+                    return "Phuong trinh co hai nghiem: x1 = " + x1 + ", x2 = " + x2;
+                }
+            }
+        }
+    }])
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>
