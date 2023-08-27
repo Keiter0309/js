@@ -77,15 +77,20 @@
         let price = document.getElementById("price").value;
         let priceError = document.getElementById("priceError");
 
-        if(!b.test(price)) {
-            priceError.innerHTML = "Nhap vao don gia";
+        if((!b.test(price))) {
+            priceError.innerHTML = "Nhap vao don gia. Don gia phai lon hong khong";
             document.getElementById("price").style.outline = "2px solid red";
-        }else {
+        }else if(price<0) {
+            priceError.innerHTML = "Don gia phai lon hon khong"
+            document.getElementById("price").style.outline = "2px solid red"
+        }
+        else {
             priceError.innerHTML = "";
             document.getElementById("price").style.outline = "2px solid green";
         }
 
     }
+    
     function check() {
         let suburban = document.getElementById("suburban").checked;
         let urban = document.getElementById("urban").checked;

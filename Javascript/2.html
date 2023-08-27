@@ -50,17 +50,16 @@
             <p id="deliveryError" style="color: red;"></p>
         </div>
     <button type="submit" class="btn btn-primary" id="btn">Submit</button>
-    <button type="button" class="btn btn-primary">Delete</button>
+    <button type="button" class="btn btn-primary" onclick="resetForm()">Delete</button>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs;.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 <script>
-    document.getElementById("btn").addEventListener("click", validateForm);
-    function validateForm(event) {
-        event.preventDefault();
-        
-
+    function validateForm() {
+        let b = /^[A-Za-z][\w$.]+@[\w]+\.\w+$/;
+        let email = document.getElementById("email").value;
+        let emailErorr = document.getElementById("emailError")
 
         let namePattern = /^[A-Za-z\s]{2,}$/;
         let firstName = document.getElementById("firstname").value;
@@ -129,17 +128,52 @@
             document.getElementById("delivery").style.outline = "2px solid green";
         }
 
-        if (
-        namePattern.test(firstName) &&
-        namePattern.test(lastName) &&
-        b.test(email) &&
-        numbercheck.test(phoneNumber) &&
-        !isNaN(quantity) && quantity > 0 &&
-        selectedDate >= currentDate
-    ) {
-        alert("Đăng ký mua hàng thành công!");
+    //     if (
+    //     namePattern.test(firstName) &&
+    //     namePattern.test(lastName) &&
+    //     b.test(email) &&
+    //     numbercheck.test(phoneNumber) &&
+    //     !isNaN(quantity) && quantity > 0 &&
+    //     selectedDate >= currentDate
+    // ) {
+    //     alert("Dang ky mua hang thanh cong!");
+    //     document.getElementById("firstname").value = "";
+    //     document.getElementById("lastname").value = "";
+    //     document.getElementById("email").value = "";
+    //     document.getElementById("phonenumber").value = "";
+    //     document.getElementById("quantity").value = "";
+    //     document.getElementById("delivery").value = "";
+    // } else {
+    //     alert("Vui long dien day du thong tin truoc khi dang ky mua hang!");
+    // }
     }
+
+    document.getElementById("btn").addEventListener("click", function() {
+        event.preventDefault();
+        let firstName = document.getElementById("firstname").value;
+        let lastName = document.getElementById("lastname").value;
+        let email = document.getElementById("email").value;
+        let phoneNumber = document.getElementById("phonenumber").value;
+        let quantity = document.getElementById("quantity").value;
+        document.getElementById("delivery").value;
+
+        if(firstName && lastName && email && email && phoneNumber && quantity) {
+            alert("Dang ky mua thanh cong!")
+        }else {
+            alert("Vui long nhap day du thong tin truoc khi dang ky mua hang!")
+        }
+    })
+
+    const resetForm = () => {
+        document.getElementById("firstname").value = "";
+        document.getElementById("lastname").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("phonenumber").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("delivery").value = "";
     }
+
+    document.getElementById("form").addEventListener("submit", validateForm);
 </script>
 </body>
 </html>
