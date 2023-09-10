@@ -45,8 +45,8 @@
             <div class="">
                 <label for="">Noi nhan hang: </label>
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="urban" value="Noi thanh"> Noi thanh
-
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="suburban" value="Ngoai thanh"> Ngoai thanh
+                <div id="deliveryTypeError" style="color: red;"></div>
             </div>
             <div class="form-group mt-3 mb-3" id="shipping" style="display: none;">
                 <label for="">Phi van chuyen</label>
@@ -89,16 +89,32 @@
             document.getElementById("price").style.outline = "2px solid green";
         }
 
+        let suburban = document.getElementById("suburban").checked;
+        let urban = document.getElementById("urban").checked;
+
+        if (suburban || urban) {
+            radioButtons.forEach(radioButton => {
+                radioButton.style.outline = "2px solid green";
+            });
+            deliveryTypeError.innerHTML = "";
+        } else {
+            radioButtons.forEach(radioButton => {
+                radioButton.style.outline = "2px solid red";
+            });
+            deliveryTypeError.innerHTML = "Vui long chon noi nhan hang";
+        }
+
     }
     
     function check() {
         let suburban = document.getElementById("suburban").checked;
         let urban = document.getElementById("urban").checked;
-    if(suburban) {
-        document.getElementById("shipping").style.display = "block";
-    }else {
-        document.getElementById("shipping").style.display = "none";
-    }
+        if(suburban) {
+            document.getElementById("shipping").style.display = "block";
+        }else {
+            document.getElementById("shipping").style.display = "none";
+        }
+
     }
 
     const radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
@@ -117,11 +133,12 @@
             let urban = document.getElementById("urban").checked;
             let shipping = document.getElementById("ship").value;
     
-            if(product && price && deliveryType) {
-                alert(`Dat mua thanh cong!\nSan pham: ${product}\nGia: ${price}\nLoai giao hang: ${deliveryType}`)
-            }else {
-                alert("Vui long dien day du thong tin mua hang!")
-            }
+            if (product && price && deliveryType) {
+                alert(`Dat mua thanh cong!\nSan pham: ${product}\nGia: ${price}\nLoai giao hang: ${deliveryType}`);
+            
+        } else {
+            alert("Vui long dien day du thong tin mua hang!");
+        }
         })
 </script>
 </body>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="./dist/output.css">
 <title>Title</title>
 </head>
 <body>
@@ -45,8 +46,8 @@
         </div>
         <div class="form-group">
             <label for="">Payment Methods: </label>
-            <input type="radio" class="" id=""> Digital mode of payment
-            <input type="radio" class="" id=""> Cash
+            <input type="radio" class="" id="digital"> Digital mode of payment
+            <input type="radio" class="" id="cash"> Cash
             <p id="deliveryError" style="color: red;"></p>
         </div>
     <button type="submit" class="btn btn-primary" id="btn">Submit</button>
@@ -56,7 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs;.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 <script>
-    function validateForm() {
+    const validateForm = () => {
         let b = /^[A-Za-z][\w$.]+@[\w]+\.\w+$/;
         let email = document.getElementById("email").value;
         let emailErorr = document.getElementById("emailError")
@@ -66,7 +67,6 @@
         let firstnameError = document.getElementById("firstnameError");
         let lastName = document.getElementById("lastname").value;
         let lastnameError = document.getElementById("lastnameError");
-
 
         let phoneNumber = document.getElementById("phonenumber").value;
         let phoneError = document.getElementById("phoneError");
@@ -126,26 +126,7 @@
         }else {
             deliveryDateError.innerHTML = "";
             document.getElementById("delivery").style.outline = "2px solid green";
-        }
-
-    //     if (
-    //     namePattern.test(firstName) &&
-    //     namePattern.test(lastName) &&
-    //     b.test(email) &&
-    //     numbercheck.test(phoneNumber) &&
-    //     !isNaN(quantity) && quantity > 0 &&
-    //     selectedDate >= currentDate
-    // ) {
-    //     alert("Dang ky mua hang thanh cong!");
-    //     document.getElementById("firstname").value = "";
-    //     document.getElementById("lastname").value = "";
-    //     document.getElementById("email").value = "";
-    //     document.getElementById("phonenumber").value = "";
-    //     document.getElementById("quantity").value = "";
-    //     document.getElementById("delivery").value = "";
-    // } else {
-    //     alert("Vui long dien day du thong tin truoc khi dang ky mua hang!");
-    // }
+        }  
     }
 
     document.getElementById("btn").addEventListener("click", function() {
@@ -155,10 +136,12 @@
         let email = document.getElementById("email").value;
         let phoneNumber = document.getElementById("phonenumber").value;
         let quantity = document.getElementById("quantity").value;
-        document.getElementById("delivery").value;
+        let deliveryDate = document.getElementById("delivery").value;
+        let selectedDate = new Date(deliveryDate);
+        let currentDate = new Date();
 
-        if(firstName && lastName && email && email && phoneNumber && quantity) {
-            alert("Dang ky mua thanh cong!")
+        if(firstName && lastName && email && email && phoneNumber && (quantity>0) && (selectedDate>currentDate)) {
+            alert(`Dat thanh cong\nHo: ${firstName}\nTen: ${lastName}\nEmail: ${email}\nSDT: ${phoneNumber}\nSo luong: ${quantity}\nNgay nhan hang: ${deliveryDate}`)
         }else {
             alert("Vui long nhap day du thong tin truoc khi dang ky mua hang!")
         }
@@ -172,8 +155,6 @@
         document.getElementById("quantity").value = "";
         document.getElementById("delivery").value = "";
     }
-
-    document.getElementById("form").addEventListener("submit", validateForm);
 </script>
 </body>
 </html>

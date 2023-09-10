@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center fs-4">Sign Up Form</div>
+            <div class="card-body">
+                <form id="signupForm" class="form-group" onfocusout="validateForm()">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" class="form-control" id="firstname" required>
+                    <div id="firstnameError" class="invalid-feedback"></div>
+                    
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" class="form-control" id="lastname" required>
+                    <div id="lastnameError" class="invalid-feedback"></div>
+                    
+                    <label for="birthday">Birthday:</label>
+                    <input type="date" class="form-control" id="birthday" required>
+                    <div id="birthdayError" class="invalid-feedback"></div>
+                    
+                    <label>Gender:</label>
+                    <div class="form-check">
+                        <input type="radio" name="gender" class="form-check-input" id="male" required>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" name="gender" class="form-check-input" id="female" required>
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div id="maleError" class="invalid-feedback"></div>
+                    
+                    <label for="phonenumber">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phonenumber" required>
+                    <div id="phonenumberError" class="invalid-feedback"></div>
+                    
+                    <label>Favorite:</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="reading" name="hobbies">
+                        <label class="form-check-label" for="reading">Reading books</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="movie" name="hobbies">
+                        <label class="form-check-label" for="movie">Watch movie</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="listen" name="hobbies">
+                        <label class="form-check-label" for="listen">Listen</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="football" name="hobbies">
+                        <label class="form-check-label" for="football">Football</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="sewing" name="hobbies">
+                        <label class="form-check-label" for="sewing">Sewing</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="hobby" name="hobbies">
+                        <label class="form-check-label" for="hobby">Hobby</label>
+                    </div>
+                    <div id="readingError" class="invalid-feedback"></div>
+                    
+                    <label for="customhobby">Custom Hobby:</label>
+                    <input type="text" class="form-control" id="customhobby">
+                    <div id="customhobbyError" class="invalid-feedback"></div>
+                    
+                    <button type="submit" class="btn btn-primary mt-3" id="submitBtn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.esm.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("signupForm");
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                validateForm();
+            });
+        });
+
+        const showError = (inputId, errorMessage) => {
+            const inputElement = document.getElementById(inputId);
+            const errorElement = document.getElementById(inputId + "Error");
+
+            errorElement.innerHTML = errorMessage;
+            inputElement.classList.add("is-invalid");
+        };
+
+        const clearError = (inputId) => {
+            const inputElement = document.getElementById(inputId);
+            const errorElement = document.getElementById(inputId + "Error");
+
+            errorElement.innerHTML = "";
+            inputElement.classList.remove("is-invalid");
+        };
+
+        const validateForm = () => {
+            const fieldsToValidate = [
+                { id: "firstname", message: "Họ và tên không được để trống" },
+                { id: "lastname", message: "Họ và tên không được để trống" },
+                { id: "birthday", message: "Ngày sinh phải được chọn" },
+                { id: "male", message: "Giới tính phải được chọn" },
+                { id: "female", message: "Giới tính phải được chọn" },
+                { id: "phonenumber", pattern: /^\d{10,11}$/, message: "Số điện thoại phải là số và từ 10 đến 11 chữ số" },
+                { id: "reading", message: "Sở thích phải được chọn ít nhất một cái" }
+            ];
+
+            let isValid = true;
+
+            fieldsToValidate.forEach((field) => {
+                const inputElement = document.getElementById(field.id)
+
+                if (field.pattern) {
+                    if (!field.pattern.test(inputElement.value.trim())) {
+                        isValid = false;
+                        showError(field.id, field.message);
+                    } else {
+                        clearError(field.id);
+                    }
+                } else if (inputElement.type === "radio" || inputElement.type === "checkbox") {
+                    if (!document.querySelector(`input[name="${inputElement.name}"]:checked`)) {
+                        isValid = false;
+                        showError(field.id, field.message);
+                    } else {
+                        clearError(field.id);
+                    }
+                } else {
+                    if (inputElement.value.trim() === "") {
+                        isValid = false;
+                        showError(field.id, field.message);
+                    } else {
+                        clearError(field.id);
+                    }
+                }
+            });
+
+            document.getElementById("submitBtn").addEventListener("click", function() {
+                if (isValid) {
+                    alert("Please enter")
+                    document.getElementById("signupForm").reset();
+                }
+            })
+        };
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+</html>
